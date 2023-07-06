@@ -8,11 +8,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.m6_2_lesson_1.R
 import com.example.m6_2_lesson_1.TaskAdapter
 import com.example.m6_2_lesson_1.TaskModel
 import com.example.m6_2_lesson_1.TaskViewModel
 import com.example.m6_2_lesson_1.databinding.ActivityMainBinding
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: TaskViewModel
@@ -28,11 +30,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel = ViewModelProvider(this)[TaskViewModel::class.java]
-        taskAdapter = TaskAdapter(emptyList(), this::onLongClik) { position, isChecked ->
+        taskAdapter = TaskAdapter(emptyList(), this::onLongClick) { position, _ ->
             viewModel.markTaskAsDone(position)
         }
 
-        binding.recycleView.apply { 
+        binding.recycleView.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = taskAdapter
         }
@@ -52,16 +54,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun onLongClik(task: TaskModel){
+    private fun onLongClick(task: TaskModel){
         val alertDialog = AlertDialog.Builder(this)
-        alertDialog.setTitle("Вы точно хотите удалить ?")
-        alertDialog.setNegativeButton("Нет", object : DialogInterface.OnClickListener{
+        alertDialog.setTitle(getString(R.string.wannaDelete))
+        alertDialog.setNegativeButton(getString(R.string.no), object : DialogInterface.OnClickListener{
             override fun onClick(dialog: DialogInterface?, which: Int) {
                 dialog?.cancel()
             }
         })
 
-        alertDialog.setPositiveButton("Да", object : DialogInterface.OnClickListener{
+        alertDialog.setPositiveButton(getString(R.string.yes), object : DialogInterface.OnClickListener{
             override fun onClick(dialog: DialogInterface?, with: Int) {
                 viewModel.deleteTask(0)
             }

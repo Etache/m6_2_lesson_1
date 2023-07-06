@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">m6_2_lesson_1</string>
+    <string name="wannaDelete">Вы точно хотите удалить ?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="todo">TODO</string>
+    <string name="input_text">Input text</string>
+    <string name="next">next</string>
+    <string name="title">Title</string>
 </resources>
